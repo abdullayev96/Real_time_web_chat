@@ -16,7 +16,6 @@ User = get_user_model()
 
 
 
-
 class ChatViewset(viewsets.ModelViewSet):
     serializer_class = ChatSerializer
     permission_classes = [permissions.IsAuthenticated]
