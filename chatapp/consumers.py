@@ -5,7 +5,10 @@ from chatapp.models import Chat, ChatMessage,ChatUser
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 
+
 User = get_user_model()
+
+
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
 
@@ -15,20 +18,31 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         self.online_user = []
         self.user = None
 
+    # async def add_online_user(self):
+    #     # adding on cache
+    #     username = self.user.username.lower()
+    #     key = f"user_:{username}"
+    #     has_key = cache.get(key)
+    #     if not has_key:
+    #         cache.set(key,username)
+    #
+    #     name = "user_:*"
+    #     all_keys = cache.keys(name)
+    #
+    #     for key in all_keys:
+    #         _,username = key.split(":")
+    #         self.online_user.append(username)
+
+
+
     async def add_online_user(self):
-        # adding on cache
-        username = self.user.username.lower()
-        key = f"user_:{username}"
-        has_key = cache.get(key)
-        if not has_key:
-            cache.set(key,username)
-        
-        name = "user_:*"
-        all_keys = cache.keys(name)
-        
-        for key in all_keys:
-            _,username = key.split(":")
-            self.online_user.append(username)
+        try:
+            key = f"user_{self.scope['user'].id}"
+            has_key = cache.get(key)
+            if not has_key:
+                cache.set(key, True, timeout=3600)
+        except Exception as e:
+            print("Cache ishlamadi:", e)
 
     def get_chat_id(self, user):
         chat_queryset = Chat.objects.filter(chat_user__user=user).values_list(

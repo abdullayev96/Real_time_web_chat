@@ -27,4 +27,4 @@ class UserDetailsSerializer(serializers.ModelSerializer):
             "address",
             "avatar",
         )
-        read_only_fields = ("id","public_id","username")
+        read_only_fields = ("id", "public_id", "username")

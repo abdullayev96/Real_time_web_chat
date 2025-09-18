@@ -3,7 +3,7 @@ from dj_rest_auth.views import (
     LoginView, LogoutView, PasswordChangeView,
 )
 from dj_rest_auth.registration.views import RegisterView
-from users.views import UserDetailsView,UserDetailView,UserAllDetailsView,UserView
+from users.views import UserDetailsView, UserDetailView, UserAllDetailsView, UserView
 
 
 urlpatterns = [

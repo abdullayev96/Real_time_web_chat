@@ -1,4 +1,4 @@
-from rest_framework.generics import RetrieveUpdateDestroyAPIView,RetrieveAPIView,ListAPIView
+from rest_framework.generics import RetrieveUpdateDestroyAPIView, RetrieveAPIView, ListAPIView
 from users.serializers import UserDetailsSerializer
 from rest_framework import permissions
 from users.models import UserModel
@@ -16,6 +16,7 @@ class UserDetailsView(RetrieveUpdateDestroyAPIView):
     def get_object(self):
         user = self.request.user
         return user
+
 
 class UserFilter(django_filters.FilterSet):
     username = django_filters.CharFilter(method='filter_username')
@@ -56,6 +57,7 @@ class UserDetailView(RetrieveAPIView):
         id = self.kwargs["uuid"]
         user = get_object_or_404(self.queryset,public_id=id)
         return user
+
 
 class UserView(UserDetailView):
     serializer_class = UserDetailsSerializer

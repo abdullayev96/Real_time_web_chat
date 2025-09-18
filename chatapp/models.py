@@ -14,12 +14,14 @@ class Chat(AbstractModel):
         return self.name
 
 
+
 class ChatUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     chat_id = models.ForeignKey(Chat, related_name="chat_user", on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"{self.user} chat"
+
 
 
 class ChatMessage(models.Model):

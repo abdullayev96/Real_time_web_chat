@@ -81,28 +81,35 @@ ASGI_APPLICATION = "chats.asgi.application"
 # WSGI_APPLICATION = 'chats.wsgi.application'
 
 REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')
-FRONT_API_1 = os.getenv('FRONT_API_1', 'http://localhost:3000')
-FRONT_API_2 = os.getenv('FRONT_API_2', 'http://127.0.0.1:3000')
+FRONT_API_1 = os.getenv('FRONT_API_1', 'http://localhost:3001')
+FRONT_API_2 = os.getenv('FRONT_API_2', 'http://127.0.0.1:3001')
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [f"redis://{REDIS_HOST}:6379/1"],
+#         },
+#     },
+# }
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [f"redis://{REDIS_HOST}:6379/1"],
-        },
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
 }
 
+
 # caching setup
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": f"redis://{REDIS_HOST}:6379/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": f"redis://{REDIS_HOST}:6379/1",
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
 
 CORS_ALLOWED_ORIGINS = [
     FRONT_API_1,
@@ -211,4 +218,4 @@ REST_FRAMEWORK = {
 }
 
 
-#####  
+#####

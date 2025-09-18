@@ -8,6 +8,6 @@ router.register('chats', ChatViewset, basename="chats")
 
 
 urlpatterns = [
-    path("", include(router.urls))
+    path("api/", include(router.urls))
     
 ]
