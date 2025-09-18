@@ -60,11 +60,18 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         }
         await self.channel_layer.group_send("OnlineUser",chatMessage)
     
+    # async def delete_online_user(self):
+    #     username = self.user.username.lower()
+    #     key = f"user_:{username}"
+    #     cache.delete(key)
+    #     self.online_user.remove(username)
+
     async def delete_online_user(self):
         username = self.user.username.lower()
         key = f"user_:{username}"
         cache.delete(key)
-        self.online_user.remove(username)
+        if username in self.online_user:
+            self.online_user.remove(username)
 
     async def connect(self):
         self.user = self.scope["user"]
