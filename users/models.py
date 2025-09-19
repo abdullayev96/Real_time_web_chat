@@ -54,14 +54,14 @@ class UserManager(BaseUserManager):
 def user_directory_path(instance, filename): 
     return 'user_{0}/{1}'.format(instance.public_id, filename)
 
+
+
+
 class UserModel(AbstractModel,AbstractUser):
     fullname = models.CharField(max_length=30, blank=True, null=True)
     about = models.TextField(max_length=500, blank=True)
     address = models.CharField(max_length=50, blank=True)
-    avatar = models.ImageField( 
-        null=True, blank=True, 
-        upload_to = user_directory_path
-    )
+    avatar = models.ImageField(null=True, blank=True, upload_to = user_directory_path)
     objects = UserManager()
 
     def __str__(self): 

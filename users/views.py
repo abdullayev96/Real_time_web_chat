@@ -7,6 +7,7 @@ from django_filters import rest_framework as filters
 import django_filters
 
 
+
 class UserDetailsView(RetrieveUpdateDestroyAPIView):
     serializer_class = UserDetailsSerializer
     permission_classes = (permissions.IsAuthenticated,)

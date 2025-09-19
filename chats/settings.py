@@ -83,6 +83,7 @@ ASGI_APPLICATION = "chats.asgi.application"
 REDIS_HOST = os.getenv('REDIS_HOST', '127.0.0.1')
 FRONT_API_1 = os.getenv('FRONT_API_1', 'http://localhost:3001')
 FRONT_API_2 = os.getenv('FRONT_API_2', 'http://127.0.0.1:3001')
+FRONT_API_3 = os.getenv('FRONT_API_3', 'http://192.20.200.20:3000')
 
 # CHANNEL_LAYERS = {
 #     "default": {
@@ -114,6 +115,8 @@ CHANNEL_LAYERS = {
 CORS_ALLOWED_ORIGINS = [
     FRONT_API_1,
     FRONT_API_2,
+    FRONT_API_3,
+
 ]
 
 # Database
@@ -162,7 +165,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
